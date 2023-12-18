@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Studio>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @foreach(var item in Model)
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                       <img width="100%" height="225" src="@item.Image" /><text x="50%" y="50%" fill="#eceeef" dy=".3em" class="h3 m-2">@item.Title</text>
+                        <div class="card-body">
+                            <p class="card-text">@item.Description</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Studio" asp-action="Detail" asp-route-id="@item.Id">More</a>
+                                    @if(User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                                    {
+                                        <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Studio" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                        <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Studio" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    }
+                                   
+
+                                </div>
+                                <small class="text-body-secondary">@item.StudioCategory</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
