@@ -14,6 +14,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IStudioService, StudioService>();
 builder.Services.AddScoped<ISessionService, SessionService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 builder.Services.AddScoped<IPhotoService, PhotoService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

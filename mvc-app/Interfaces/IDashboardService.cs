@@ -6,5 +6,9 @@ namespace mvc_app.Interfaces
     {
         Task<List<Session>> GetAllUserSessions();
         Task<List<Studio>> GetAllUserStudios();
+        Task<AppUser> GetByIdNoTracking(string id);
+        Task<AppUser> GetUserById(string id);
+        bool Update(AppUser user);
+        bool Save();
     }
 }

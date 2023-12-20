@@ -1,0 +1,24 @@
+﻿@using mvc_app.ViewModels;
+@model UserDetailViewModel
+
+<div class="container">
+	<h1 class="my-4">Musiciasn detail page
+		<small>secondary text</small>
+	</h1>
+	<div class="row">
+		<div class="col-md-8">
+			@* <img class="img-fluid" src="@Model.Image" alt="" /> *@
+		</div>
+
+		<div class="col-md-4">
+			<h3 class="my-3">@Model.Genre</h3>
+			<p>@Model.Instrument</p>
+			<h3 class="my-3">Location</h3>
+			<ul>
+@* 				<li>@Model.Address.City</li>
+				<li>@Model.Address.City</li>
+				<li>@Model.StudioCategory</li> *@
+			</ul>
+		</div>
+	</div>
+</div>

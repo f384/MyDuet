@@ -1,4 +1,8 @@
-﻿@{
+﻿﻿@using mvc_app.ViewModels
+@model HomeViewModel
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -19,7 +23,7 @@
     </symbol>
 </svg>
 
-<main>
+
     <div class="container py-4">
         <header class="pb-3 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
@@ -32,7 +36,7 @@
             </a>
         </header>
 
-        <div class="p-5 mb-4 bg-dark rounded-3" style="background: url('https://images.unsplash.com/photo-1516223725307-6f76b9ec8742?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fG11c2ljJTIwcHJvZHVjZXJ8ZW58MHx8MHx8fDA%3D') center center / cover no-repeat;">
+         <div class="p-5 mb-4 bg-dark rounded-3" style="background: url('https://images.unsplash.com/photo-1516223725307-6f76b9ec8742?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fG11c2ljJTIwcHJvZHVjZXJ8ZW58MHx8MHx8fDA%3D') center center / cover no-repeat;">
             <div class="container-fluid py-5 text-light">
                 <h1 class="display-5 fw-bold text-info mb-5">Join Today</h1>
                 <button class="btn btn-primary btn-lg" type="button">Login</button>
@@ -40,7 +44,7 @@
             </div>
         </div>
 
-
+@*
         <div class="row align-items-md-stretch">
             <div class="col-md-6">
                 <div class="h-100 p-5 text-bg-dark rounded-3">
@@ -56,4 +60,56 @@
                     <button class="btn btn-outline-secondary" type="button">Example button</button>
                 </div>
             </div>
+        </div> *@
+    <section>
+        <div class="container">
+            @if (Model.Studios == null)
+            {
+                <h1 class="fw-light">
+                    There are no music studios in your area! <a asp-area="" asp-controller="Account"
+                                                                asp-action="Login">Login</a> and create one!
+                </h1>
+            }
+            else
+            {
+                <div class="row justify-content-between mb-5">
+                    <div class="col-auto">
+                        <h3>Music studios near @Model.City, @Model.State</h3>
+                    </div>
+                    <!--end of col-->
+                    <div class="col-auto">
+                        <a href="#" class="btn btn-outline-primary">View all</a>
+                    </div>
+                    <!--end of col-->
+                </div>
+                
+                    @foreach (var item in Model.Studios)
+                    {
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <img width="100%" height="225" src="@item.Image" /><text x="50%" y="50%" fill="#eceeef" dy=".3em" class="h3 m-2">@item.Title</text>
+                                <div class="card-body">
+                                    <p class="card-text">@item.Description</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Studio" asp-action="Detail" asp-route-id="@item.Id">More</a>
+                                            @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                                            {
+                                                <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Studio" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                                <a type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Studio" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                            }
+
+
+                                        </div>
+                                        <small class="text-body-secondary">@item.StudioCategory</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                
+            }
+            <!--end of row-->
         </div>
+        <!--end of container-->
+    </section>
